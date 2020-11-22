@@ -1,23 +1,59 @@
 import React from "react"
-import { useStaticQuery, graphql, Link } from "gatsby"
+import { useStaticQuery, graphql, Link, Image } from "gatsby"
+import Img from "gatsby-image"
 
 export default function HomeHero() {
+  const query = graphql`
+    {
+      contentfulHomeHero {
+        heroImage {
+          fixed {
+            src
+          }
+        }
+        heroHeading
+        heroSubheading
+        heroButtonText
+        heroButtonSubtext
+        heroSubheading2 {
+          heroSubheading2
+        }
+      }
+    }
+  `
+
+  const data = useStaticQuery(query)
+
+  console.log(data)
+  const {
+    contentfulHomeHero: {
+      heroImage: {
+        fixed: { src },
+      },
+      heroHeading,
+      heroSubheading,
+      heroButtonText,
+      heroButtonSubtext,
+      heroSubheading2: { heroSubheading2 },
+    },
+  } = data
+
+  console.log(src)
   return (
     <div id="adbox">
       <div className="clearfix">
-        <img src="images/box.png" alt="Img" height="342" width="368" />
+        {/* <Image fluid={fluid}></Image> */}
+        <img src={src} alt="Img" height="342" width="368" />
         <div>
-          <h1>Ideas?</h1>
-          <h2>That's what we live for.</h2>
+          <h1>{heroHeading}</h1>
+          <h2>{heroSubheading}</h2>
           <p>
-            Wix is an online website builder with a simple drag & drop
-            interface, meaning you do the work online and instantly publish to
-            the web.{" "}
+            {heroSubheading2}{" "}
             <span>
               <Link to="/" className="btn">
-                Try It Now!
+                {heroButtonText}
               </Link>
-              <b>Don’t worry it’s for free</b>
+              <b>{heroButtonSubtext}</b>
             </span>
           </p>
         </div>
