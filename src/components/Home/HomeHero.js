@@ -1,4 +1,5 @@
 import React from "react"
+import { useStaticQuery, graphql, Link } from "gatsby"
 
 export default function HomeHero() {
   return (
@@ -13,9 +14,9 @@ export default function HomeHero() {
             interface, meaning you do the work online and instantly publish to
             the web.{" "}
             <span>
-              <a href="index.html" className="btn">
+              <Link to="/" className="btn">
                 Try It Now!
-              </a>
+              </Link>
               <b>Don’t worry it’s for free</b>
             </span>
           </p>
